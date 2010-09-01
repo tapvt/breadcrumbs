@@ -51,8 +51,10 @@ class Breadcrumb
 	 */
 	public function set_url($url = "")
 	{
+/*
 		if ( ! validate::url($url))
 			$url = NULL;
+*/
 		
 		$this->url = $url;
 		
