@@ -42,6 +42,15 @@ class Breadcrumbs
 	 */
 	public static function render($template = "breadcrumbs/layout")
 	{
-		echo View::factory($template)->set('breadcrumbs', self::$breadcrumbs)->render();
+	   $_config = array(
+	       'sep' => Kohana::config('breadcrumbs.separator'),
+   	       'min_depth' => Kohana::config('breadcrumbs.min_depth'),
+   	       'last' => Kohana::config('breadcrumbs.after_last'),
+	   );
+	   
+		echo View::factory($template)
+		  ->set('breadcrumbs', self::$breadcrumbs)
+		  ->set('conf', $_config )
+		  ->render();
 	}
 }
