@@ -25,6 +25,25 @@ class BreadcrumbsTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $actual);
 	}
 	
+		public function test_should_no_breadcrumbs_under_limit()
+	{
+        $expected = "<ul id=\"breadcrumbs\">
+</ul>
+";
+        $i = 0;
+        $count = Kohana::config('breadcrumbs.min_depth');
+        while($i < $count - 1){
+    		Breadcrumbs::add(Breadcrumb::factory()->set_title("Crumb ".$i)->set_url("http://example.com/"));
+    		$i++;
+        }
+		ob_start();
+		Breadcrumbs::render();
+		$actual = ob_get_contents();
+		ob_end_clean();
+
+		$this->assertEquals($expected, $actual);
+	}
+	
 	/**
 	 * @test
 	 * @group breadcrumbs
@@ -33,14 +52,18 @@ class BreadcrumbsTest extends PHPUnit_Framework_TestCase
 	{
 		Breadcrumbs::add(Breadcrumb::factory()->set_title("Crumb 1")->set_url("http://example.com/"));
 		Breadcrumbs::add(Breadcrumb::factory()->set_title("Crumb 2"));
-		
-$expected =<<<EOL
-<ul id="breadcrumbs">
-	<li><a href="http://example.com/">Crumb 1</a></li>
-	<li>Crumb 2</li>
-</ul>
 
-EOL;
+        $i = 0;
+        
+        $count = Kohana::config('breadcrumbs.min_depth');
+		$sep = Kohana::config('breadcrumbs.separator');
+		
+        $expected = "<ul id=\"breadcrumbs\">\n";
+        if(count(Breadcrumbs::get()) >= $count){
+        	$expected .= "\t<li><a href=\"http://example.com/\">Crumb 1</a> {$sep}</li>\n";
+            $expected .= "\t<li>Crumb 2</li>\n";
+        }
+        $expected .= "</ul>\n";
 		ob_end_clean();
 		ob_start();
 		Breadcrumbs::render();
@@ -57,6 +80,15 @@ EOL;
 	public function test_should_not_allow_non_breadcrumb_objects_to_be_added()
 	{
 		Breadcrumbs::add("not a breadcrumb object");
+	}
+	
+	/**
+	 * @test
+	 * @group breadcrumbs
+	 */
+	public function test_should_allow_breadcrumb_objects_to_be_added()
+	{
+        Breadcrumbs::add(Breadcrumb::factory()->set_title("Added Crumb")->set_url("http://example.com/"));
 	}
 	
 	/**

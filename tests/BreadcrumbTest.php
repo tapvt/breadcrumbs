@@ -58,17 +58,6 @@ class BreadcrumbTest extends PHPUnit_Framework_TestCase
 	
 	/**
 	 * @test
-	 * @group breadcrumbs
-	 * @depends test_should_confirm_factory_returns_instance
-	 */
-	public function test_should_set_invalid_url_as_url_to_null()
-	{
-		$this->crumb->set_url("not a url");
-		$this->assertSame(NULL, $this->crumb->get_url());
-	}
-	
-	/**
-	 * @test
 	 * @depends test_should_confirm_factory_returns_instance
 	 * @group breadcrumbs
 	 */

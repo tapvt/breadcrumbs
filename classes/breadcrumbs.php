@@ -34,7 +34,12 @@ class Breadcrumbs
 	 */
 	public static function add(Breadcrumb $crumb)
 	{
-		array_push(self::$breadcrumbs, $crumb);
+        if(is_a($crumb, Breadcrumb)){
+    		array_push(self::$breadcrumbs, $crumb);
+    		return TRUE;
+        } else {
+            throw new Breadcrumb_Exception("Not a breadcrumb object!");
+        }
 	}
 	
 	/**
@@ -47,10 +52,13 @@ class Breadcrumbs
    	       'min_depth' => Kohana::config('breadcrumbs.min_depth'),
    	       'last' => Kohana::config('breadcrumbs.after_last'),
 	   );
-	   
+	   if(count(self::$breadcrumbs) > ($conf['min_depth']-1)){
 		echo View::factory($template)
 		  ->set('breadcrumbs', self::$breadcrumbs)
 		  ->set('conf', $_config )
 		  ->render();
+        } else {
+            return NULL;
+        }
 	}
 }

@@ -32,7 +32,6 @@ class Breadcrumb
 	{
 		if ( ! is_string($title) AND ! is_numeric($title) AND ! (is_object($title) AND method_exists($title, "__toString")))
 			throw new Breadcrumb_Exception("Breadcrumb title is not numeric or a string.");
-		
 		$this->title = (string) $title;
 		
 		return $this;
