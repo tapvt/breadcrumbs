@@ -52,13 +52,9 @@ class Breadcrumbs
    	       'min_depth' => Kohana::config('breadcrumbs.min_depth'),
    	       'last' => Kohana::config('breadcrumbs.after_last'),
 	   );
-	   if(count(self::$breadcrumbs) > ($_config['min_depth']-1)){
 		echo View::factory($template)
 		  ->set('breadcrumbs', self::$breadcrumbs)
 		  ->set('conf', $_config )
 		  ->render();
-        } else {
-            return NULL;
-        }
 	}
 }
