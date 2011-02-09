@@ -3,6 +3,7 @@
  * Breadcrumbs
  *
  * @author Kieran Graham
+ * @author Ben Weller
  */
 ?>
 <? $c = count($breadcrumbs) ?>

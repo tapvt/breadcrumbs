@@ -3,25 +3,40 @@
  * Breadcrumbs
  *
  * @author Kieran Graham
+ * @author Ben Weller
  */
 class Breadcrumbs
 {
+
 	/**
-	 * Breadcrumbs
+	 * breadcrumbs
+	 * 
+	 * (default value: array())
+	 * 
+	 * @var array
+	 * @access private
+	 * @static
 	 */
 	private static $breadcrumbs = array();
 	
 	/**
-	 * Clear
+	 * clear function.
+	 * 
+	 * @access public
+	 * @static
+	 * @return void
 	 */
 	public static function clear()
 	{
 		self::$breadcrumbs = array();
 	}
 	
+
 	/**
-	 * Get
-	 *
+	 * get function.
+	 * 
+	 * @access public
+	 * @static
 	 * @return array Breadcrumbs
 	 */
 	public static function get()
@@ -30,7 +45,12 @@ class Breadcrumbs
 	}
 	
 	/**
-	 * Add
+	 * add function.
+	 * 
+	 * @access public
+	 * @static
+	 * @param Breadcrumb $crumb
+	 * @return boolean TRUE | exception Breadcrumb_Exception
 	 */
 	public static function add(Breadcrumb $crumb)
 	{
@@ -41,9 +61,14 @@ class Breadcrumbs
             throw new Breadcrumb_Exception("Not a breadcrumb object!");
         }
 	}
-	
+
 	/**
-	 * Render
+	 * render function.
+	 * 
+	 * @access public
+	 * @static
+	 * @param string $template (default: "breadcrumbs/layout")
+	 * @return void
 	 */
 	public static function render($template = "breadcrumbs/layout")
 	{
