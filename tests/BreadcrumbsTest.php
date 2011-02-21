@@ -14,7 +14,6 @@ class BreadcrumbsTest extends PHPUnit_Framework_TestCase
 	{
 		$expected = array
 		(
-			Breadcrumb::factory()->set_title("Home")->set_url("http://"),
 			Breadcrumb::factory()->set_title("Crumb 1")->set_url("http://example.com/"),
 			Breadcrumb::factory()->set_title("Crumb 2")
 		);
@@ -26,7 +25,7 @@ class BreadcrumbsTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $actual);
 	}
 	
-		public function test_no_breadcrumbs_under_limit()
+	public function test_no_breadcrumbs_under_limit()
 	{
         $expected = "<ul id=\"breadcrumbs\">
 </ul>
