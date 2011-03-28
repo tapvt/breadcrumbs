@@ -78,7 +78,7 @@ class Breadcrumbs
    	       'min_depth' => Kohana::config('breadcrumbs.min_depth'),
    	       'last' => Kohana::config('breadcrumbs.after_last'),
 	   );
-		echo View::factory($template)
+		return View::factory($template)
 		  ->set('breadcrumbs', self::$breadcrumbs)
 		  ->set('conf', $_config )
 		  ->render();
