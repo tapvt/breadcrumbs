@@ -49,16 +49,17 @@ class Breadcrumbs
 	 * 
 	 * @access public
 	 * @static
-	 * @param Breadcrumb $crumb
+	 * @param array array({title}, {url})
 	 * @return boolean TRUE | exception Breadcrumb_Exception
 	 */
-	public static function add(Breadcrumb $crumb)
+	public static function add(array $array)
 	{
-        if(is_a($crumb, 'Breadcrumb')){
-    		array_push(self::$breadcrumbs, $crumb);
+
+        if(is_array($array) && count($array) == 2){
+    		array_push(self::$breadcrumbs, Breadcrumb::factory()->set_title($array[0])->set_url($array[1]));
     		return TRUE;
         } else {
-            throw new Breadcrumb_Exception("Not a breadcrumb object!");
+            throw new Breadcrumb_Exception("Input to Breadcrumbs:add must be an array of 2 elements (array(title, url))!");
         }
 	}
 
@@ -77,7 +78,7 @@ class Breadcrumbs
    	       'min_depth' => Kohana::config('breadcrumbs.min_depth'),
    	       'last' => Kohana::config('breadcrumbs.after_last'),
 	   );
-		echo View::factory($template)
+		return View::factory($template)
 		  ->set('breadcrumbs', self::$breadcrumbs)
 		  ->set('conf', $_config )
 		  ->render();
