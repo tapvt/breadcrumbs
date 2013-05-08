@@ -110,6 +110,13 @@ class Breadcrumbs {
      */
     public static function generate_from_request(Request $request)
     {
+        $only_initial = Kohana::$config->load('breadcrumbs.only_initial');
+
+        if ($only_initial && !$request->is_initial())
+        {
+            return;
+        }
+
         $exclude      = Kohana::$config->load('breadcrumbs.exclude');
         $exclude_urls = Kohana::$config->load('breadcrumbs.exclude_duplicate_urls');
         $exclude_num  = Kohana::$config->load('breadcrumbs.exclude_numeric');
