@@ -151,7 +151,7 @@ class Breadcrumbs {
                 self::$exclude_urls_haystack[] = $page['url'];
         }
 
-        return self::render();
+//        return self::render();
     }
 
 }
