@@ -7,21 +7,21 @@ defined('SYSPATH') OR die('No direct access allowed.');
  * @author Ben Weller
  */
 ?>
-<? $c = count($breadcrumbs) ?>
+<?php $c = count($breadcrumbs) ?>
 
 <ul id="breadcrumbs">
-    <? if ($c > ($conf['min_depth'] - 1)) : ?>
+    <?php if ($c > ($conf['min_depth'] - 1)) : ?>
 
-        <? foreach ($breadcrumbs as $crumb) : ?>
+        <?php foreach ($breadcrumbs as $crumb) : ?>
 
-            <? if ($crumb->get_url() !== NULL AND count($breadcrumbs > 1)) : ?>
+            <?php if ($crumb->get_url() !== NULL AND count($breadcrumbs > 1)) : ?>
                 <li><a href="<?= $crumb->get_url() ?>"><?= __($crumb->get_title()) ?></a> <?= ( $c != 1 ? $conf['sep'] : ($conf['last'] == TRUE ? $conf['sep'] : '' ) ) ?></li>
-            <? else : ?>
+            <?php else : ?>
                 <li><?= __($crumb->get_title()) ?></li>
-            <? endif; ?>
+            <?php endif; ?>
 
-            <? $c-- ?>
-        <? endforeach; ?>
+            <?php $c-- ?>
+        <?php endforeach; ?>
 
-    <? endif; ?>
+    <?php endif; ?>
 </ul>
